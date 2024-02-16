@@ -19,3 +19,19 @@ export function addProduct(
 
   return [...products, { ...newProduct, quantity: 1 }];
 }
+
+export function removeProduct(
+  products: ProductCartProps[],
+  productToRemoveId: string
+) {
+  const updatedProducts = products.map((product) =>
+    product.id === productToRemoveId
+      ? {
+          ...product,
+          quantity: product.quantity > 1 ? product.quantity - 1 : 0,
+        }
+      : product
+  );
+
+  return updatedProducts.filter((product) => product.quantity > 0);
+}
